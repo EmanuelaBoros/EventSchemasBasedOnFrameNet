@@ -154,4 +154,26 @@ print(roles)
 ```
 
 
+To parse relation mappings:
+
+```python
+import xml.etree.ElementTree as ET
+
+ns = {"ev": "http://Eventnet.icsi.berkeley.edu"}
+
+tree = ET.parse("eventRelations.xml")
+root = tree.getroot()
+
+for relation_type in root.findall("ev:eventRelationType", ns):
+    relation_name = relation_type.attrib["name"]
+    for relation in relation_type.findall("ev:eventRelation", ns):
+        sub_event = relation.attrib["subEventName"]
+        super_event = relation.attrib["superEventName"]
+        mappings = [
+            (m.attrib["subRoleName"], m.attrib["superRoleName"])
+            for m in relation.findall("ev:RoleMapping", ns)
+        ]
+        print(relation_name, sub_event, "->", super_event, mappings[:3])
+```
+
 
