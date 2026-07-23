@@ -54,4 +54,49 @@ For example, the `Attack` schema includes roles such as:
 - `Time`
 - `Purpose`
 - `Result`
-- 
+
+
+
+
+## Lists
+
+`event_schema_list.txt` provides a compact tabular view:
+
+```text
+Event Type          Event Argument Roles
+Attack              (Assailant, Victim, Weapon, Place, Time, ...)
+Commerce_buy        (Buyer, Seller, Goods, Money, ...)
+Death               (Protagonist, Cause, Time, Place, ...)
+```
+
+`event_scenario_list.txt` contains higher-level event scenarios, for example:
+
+```text
+Commerce_scenario
+Crime_scenario
+Employment_scenario
+Medical_interaction_scenario
+Motion_scenario
+Transfer_scenario
+```
+
+These files are convenient starting points when browsing the resource or selecting event types for downstream tasks.
+
+## Event Relations
+
+`eventRelations.xml` defines structured relations between events. The relation types include:
+
+- `Causative_of`
+- `Inchoative_of`
+- `Inheritance`
+- `Metaphor`
+- `Perspective_on`
+- `Precedes`
+- `ReFraming_Mapping`
+- `See_also`
+- `SubEvent`
+- `Using`
+
+Each relation can include mappings between argument roles in the related events. For example, a relation may connect a child event to a parent event and specify how the child event's roles correspond to the parent event's roles.
+
+
