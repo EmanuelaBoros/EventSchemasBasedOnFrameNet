@@ -100,3 +100,58 @@ These files are convenient starting points when browsing the resource or selecti
 Each relation can include mappings between argument roles in the related events. For example, a relation may connect a child event to a parent event and specify how the child event's roles correspond to the parent event's roles.
 
 
+## How to Use
+
+Clone the repository:
+
+```bash
+git clone https://github.com/EmanuelaBoros/EventSchemasBasedOnFrameNet.git
+cd EventSchemasBasedOnFrameNet
+```
+
+Browse the resource directly:
+
+```bash
+ls eventSchemas/
+less event_schema_list.txt
+less event_scenario_list.txt
+less eventRelations.xml
+```
+
+Open the hierarchy files in a browser:
+
+```text
+EventFrameHierachy.html
+EventScenarioHierarchical.html
+```
+
+No installation is required unless you want to parse the XML files programmatically.
+
+## Programmatic Parsing
+
+The XML files can be read with standard XML parsers. Because the schema files use XML namespaces, namespace-aware parsing is recommended.
+
+Minimal Python example:
+
+```python
+from pathlib import Path
+import xml.etree.ElementTree as ET
+
+ns = {"fn": "http://framenet.icsi.berkeley.edu"}
+
+schema_path = Path("eventSchemas/Attack.xml")
+tree = ET.parse(schema_path)
+root = tree.getroot()
+
+event_name = root.attrib["name"]
+roles = [
+    role.attrib["name"]
+    for role in root.findall("fn:Arg", ns)
+]
+
+print(event_name)
+print(roles)
+```
+
+
+
